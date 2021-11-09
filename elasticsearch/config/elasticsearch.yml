@@ -2,6 +2,7 @@
 cluster.name: "elk-tls-cluster"
 network.host: "0.0.0.0"
 http.host: 0.0.0.0
+node.max_local_storage_nodes: 2
 
 ## License
 xpack.license.self_generated.type: trial

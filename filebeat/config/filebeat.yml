@@ -1,9 +1,20 @@
 name: filebeat
 setup.template:
   enabled: true
+setup.dashboards.enabled: true
+setup.kibana.host: "https://kibana:5601"
+setup.kibana.ssl.certificate_authorities: ["${CONFIG_DIR}/ca.crt"]
+setup.kibana.ssl.certificate: "${CONFIG_DIR}/filebeat.crt"
+setup.kibana.ssl.verification_mode: certificate
+setup.kibana.ssl.key: "${CONFIG_DIR}/filebeat.key"
 output.elasticsearch.username: ${ELASTIC_USERNAME}
 output.elasticsearch.password: ${ELASTIC_PASSWORD}
 path.config: ${CONFIG_DIR}
+filebeat.config.modules:
+    enabled: true
+    path: ${path.config}/modules.d/*.yml
+    reload.enabled: true
+    reload.period: 60s
 
 filebeat.inputs:
     - type: tcp
@@ -12,15 +23,17 @@ filebeat.inputs:
       host: "filebeat:9000"
 
 output.logstash:
-    enabled: true
-    hosts: ["logstash:5045"]
+    enabled: false
+    hosts: ["https://logstash:5045"]
     ssl.certificate_authorities: ["${CONFIG_DIR}/ca.crt"]
     ssl.certificate: "${CONFIG_DIR}/filebeat.crt"
     ssl.key: "${CONFIG_DIR}/filebeat.key"
+    ssl.verification_mode: certificate
   
 output.elasticsearch:
-  enabled: false
-  hosts: ["https://elasticsearch:9200"]
+  enabled: true
+  hosts: ["${ELASTICSEARCH_HOSTS}"]
   ssl.certificate_authorities: ["${CONFIG_DIR}/ca.crt"]
   ssl.certificate: "${CONFIG_DIR}/filebeat.crt"
+  ssl.verification_mode: certificate
   ssl.key: "${CONFIG_DIR}/filebeat.key"
