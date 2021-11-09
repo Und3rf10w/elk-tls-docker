@@ -4,7 +4,7 @@ FROM amd64/ubuntu:20.04
 
 RUN apt-get update && \
     apt-get -y install sudo && \
-    apt-get -y install python3-pip python3
+    apt-get -y install python3-pip python3 curl wget
 
 RUN pip3 install requests
 RUN pip3 install PyYaml

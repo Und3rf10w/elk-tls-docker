@@ -1,6 +1,7 @@
 ---
 server.name: kibana
 server.host: 0.0.0.0
+server.publicBaseUrl: "${KIBANA_URL}"
 
 # Elasticsearch settings
 elasticsearch.hosts: [ "https://elasticsearch:9200" ]
@@ -33,3 +34,6 @@ xpack.fleet.agents.elasticsearch.host: "https://elasticsearch:9200"
 
 xpack.ingestManager.enabled: true
 xpack.ingestManager.fleet.enabled: true
+
+# Allow self signed shit on xpack
+xpack.actions.rejectUnauthorized: false
