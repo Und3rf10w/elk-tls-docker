@@ -4,7 +4,7 @@ server.host: 0.0.0.0
 server.publicBaseUrl: "${KIBANA_URL}"
 
 # Elasticsearch settings
-elasticsearch.hosts: [ "https://elasticsearch:9200" ]
+elasticsearch.hosts: [ "${ELASTICSEARCH_HOSTS}" ]
 elasticsearch.ssl.certificateAuthorities: [ "${CONFIG_DIR}/ca.crt" ]
 elasticsearch.username: "${ELASTIC_USERNAME}"
 elasticsearch.password: "${ELASTIC_PASSWORD}"
@@ -30,7 +30,7 @@ xpack.fleet.enabled: true
 xpack.fleet.agents.enabled: true
 xpack.fleet.agents.tlsCheckDisabled: true
 xpack.fleet.agents.kibana.host: "https://kibana:5601"
-xpack.fleet.agents.elasticsearch.host: "https://elasticsearch:9200"
+xpack.fleet.agents.elasticsearch.host: "${ELASTICSEARCH_HOSTS}"
 
 xpack.ingestManager.enabled: true
 xpack.ingestManager.fleet.enabled: true
